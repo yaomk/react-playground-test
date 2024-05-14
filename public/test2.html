@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+</head>
+<body>
+  <div id="root"></div>
+  <script type="importmap">
+    {
+      "imports": {
+        "react": "https://esm.sh/react@18.2.0",
+        "react-dom/client": "https://esm.sh/react-dom@18.2.0"
+      }
+    }
+  </script>
+  <script type="module" jsx>
+    import react from 'react'
+    import ReactDOM from 'react-dom/client'
+
+    window._react = react
+    window._ReactDOM = ReactDOM
+
+    const root = document.getElementById('root')
+    ReactDOM.createRoot(root).render(
+      react.createElement('div', {style: {color: 'red'}}, 'createElement test')
+    )
+  </script>
+</body>
+</html>

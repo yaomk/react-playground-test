@@ -11,7 +11,13 @@
 name: 打包 playground-test-react 项目
 
 # 字符串写法，一般不带引号
-on: push
+on:
+  push:
+    branches:
+      - main
+
+permissions:
+  contents: write
 
 # 对象写法，对应的json为："jobs": {"npm-build": {"runs-on": "unbuntu-latest"}}
 jobs:
@@ -26,8 +32,13 @@ jobs:
     - name: 输出当前目录
       run: pwd
 
-    - name: 安装依赖
-      run: npm i
+    - name: 安装依赖👷 和 项目打包📦
+      run: |
+        npm i
+        npm run build
 
-    - name: 项目打包
-      run: npm run build
+    - name: 部署🚀
+      uses: JamesIves/github-pages-deploy-action@v4
+      with:
+        branch: gh-pages
+        folder: build

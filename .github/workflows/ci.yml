@@ -1,10 +1,33 @@
+# YAML (YAML Aint Markup Language) 是一种标记语言，通常以.yml为后缀的文件
+
+# yml 基本语法
+# key: value 表示键值对关系，冒号后面必须有一个空格
+# 使用空格的缩进表示层级关系，空格数目不重要，只要是左对齐的一列数据，都是同一个层级的
+# 缩进时不允许使用Tab键，只允许使用空格
+# 大小写敏感
+
+# --- 文档块，对于测试环境，预生产环境，生产环境可以使用不同的配置，如果只想写到一个文件中，yml与是支持的,每个块用---隔开
+---
+name: 打包 playground-test-react 项目
+
+# 字符串写法，一般不带引号
 on: push
 
+# 对象写法，对应的json为："jobs": {"npm-build": {"runs-on": "unbuntu-latest"}}
 jobs:
   npm-build:
+    name: npm-build 工作
     runs-on: ubuntu-latest
+    # 数组写法，对应的json为："steps": [{"uses": "actions/checkout@v4"},{"run": "pwd"}]
     steps:
+    - name: 读取仓库内容
       - uses: actions/checkout@v4
+
+    - name: 输出当前目录
       - run: pwd
+
+    - name: 安装依赖
       - run: npm i
+
+    - name: 项目打包
       - run: npm run build
